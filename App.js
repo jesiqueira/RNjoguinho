@@ -13,8 +13,9 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [userNumber, setUserNumber] = React.useState()
-  const [gameIsOver, setgameIsOver] = React.useState(true)
+  const [gameIsOver, setGameIsOver] = React.useState(true)
   const [appIsReady, setAppIsReady] = React.useState(false)
+  const [guessRounds, setGuessRounds] = React.useState(0)
 
   React.useEffect(() => {
     const prepare = async () => {
@@ -48,11 +49,16 @@ export default function App() {
 
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber)
-    setgameIsOver(false)
+    setGameIsOver(false)
   }
 
   const gameOverHandle = () => {
-    setgameIsOver(true)
+    setGameIsOver(true)
+  }
+
+  const startNewGameHandle = () => {
+    setUserNumber(null)
+    setGuessRounds(0)
   }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />
@@ -62,7 +68,7 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />
+    screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessRounds} onStartNewGame={startNewGameHandle} />
   }
 
   return (

@@ -14,6 +14,6 @@ npx expo install expo-linear-gradient
 
 npx expo install expo-font
 
-# Instalar Loading
+# Instalar Loading com Splash-Screen
 
-npx expo install expo-app-loading
+npx expo install expo-splash-screen
