@@ -1,9 +1,9 @@
-import { TextInput, View } from 'react-native'
+import { Text, View } from 'react-native'
 
 const GameOverScreen = () => {
   return (
     <View>
-      <TextInput />
+      <Text>Game is Over!</Text>
     </View>
   )
 }
