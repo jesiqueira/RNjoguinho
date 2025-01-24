@@ -1,13 +1,21 @@
-import { Image, View, StyleSheet, Text, Dimensions } from 'react-native'
+import { Image, View, StyleSheet, Text, useWindowDimensions } from 'react-native'
 import Title from '../components/ui/Title'
 import Colors from '../constants/colors'
 import PrimaryButton from '../components/ui/PrimaryButton'
 
 const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
+  const { width, height } = useWindowDimensions()
+
+  const widthDimensions = width < 400 ? 200 : 150
+  const heightDimensions = width < 400 ? 200 : 150
+
+  console.log('Width: ', widthDimensions)
+  console.log('Height: ', heightDimensions)
+
   return (
     <View style={styles.rootContainer}>
       <Title>GAMER OVER!</Title>
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, { width: widthDimensions, height: heightDimensions }]}>
         <Image style={styles.image} source={require('../assets/images/success.png')} />
       </View>
       <Text style={styles.summaryText}>
@@ -21,8 +29,6 @@ const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
 
 export default GameOverScreen
 
-const deviceWidth = Dimensions.get('window').width
-
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
@@ -31,8 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
+    // width: deviceWidth < 380 ? 150 : 300,
+    // height: deviceWidth < 380 ? 150 : 300,
     borderRadius: '50%',
     borderWidth: 3,
     borderColor: Colors.primary800,

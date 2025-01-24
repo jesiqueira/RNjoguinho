@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 0,
   },
   numberText: {
     color: Colors.accent500,
