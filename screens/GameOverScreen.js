@@ -1,4 +1,4 @@
-import { Image, View, StyleSheet, Text, useWindowDimensions } from 'react-native'
+import { Image, View, StyleSheet, Text, useWindowDimensions, ScrollView } from 'react-native'
 import Title from '../components/ui/Title'
 import Colors from '../constants/colors'
 import PrimaryButton from '../components/ui/PrimaryButton'
@@ -6,33 +6,49 @@ import PrimaryButton from '../components/ui/PrimaryButton'
 const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
   const { width, height } = useWindowDimensions()
 
-  const widthDimensions = width < 400 ? 200 : 150
-  const heightDimensions = width < 400 ? 200 : 150
+  let imageZise = 300
 
-  console.log('Width: ', widthDimensions)
-  console.log('Height: ', heightDimensions)
+  if (width < 390) {
+    imageZise = 150
+  }
+
+  if (height < 400) {
+    imageZise = 100
+  }
+
+  const imageStyle = {
+    width: imageZise,
+    height: imageZise,
+  }
 
   return (
-    <View style={styles.rootContainer}>
-      <Title>GAMER OVER!</Title>
-      <View style={[styles.imageContainer, { width: widthDimensions, height: heightDimensions }]}>
-        <Image style={styles.image} source={require('../assets/images/success.png')} />
+    <ScrollView style={styles.screen}>
+      <View style={styles.rootContainer}>
+        <Title>GAMER OVER!</Title>
+        <View style={[styles.imageContainer, imageStyle]}>
+          <Image style={styles.image} source={require('../assets/images/success.png')} />
+        </View>
+        <Text style={styles.summaryText}>
+          Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess the number{' '}
+          <Text style={styles.highlight}>{userNumber}</Text>.
+        </Text>
+        <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
       </View>
-      <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess the number{' '}
-        <Text style={styles.highlight}>{userNumber}</Text>.
-      </Text>
-      <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
-    </View>
+    </ScrollView>
   )
 }
 
 export default GameOverScreen
 
+// cont deviceWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
-    padding: 24,
+    padding: 36,
     justifyContent: 'center',
     alignItems: 'center',
   },
